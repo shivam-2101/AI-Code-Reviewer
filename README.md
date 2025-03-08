@@ -185,10 +185,6 @@ Before you begin, ensure you have:
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
-## 📞 Support
-
-For support, email support@example.com or open an issue on GitHub.
-
 ## 🙏 Acknowledgments
 
 - Google Gemini AI
@@ -198,4 +194,4 @@ For support, email support@example.com or open an issue on GitHub.
 
 ---
 
-Made with ❤️ by [Your Name]
+Made with ❤️ by SHIVAM SHUKLA

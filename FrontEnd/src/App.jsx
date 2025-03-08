@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "prismjs/themes/prism-tomorrow.css";
+import "prismjs/themes/prism-okaidia.css";
 import Editor from "react-simple-code-editor";
 import prism from "prismjs";
 import Markdown from "react-markdown";
@@ -40,13 +40,18 @@ function App() {
               }
               padding={10}
               style={{
-                fontFamily: '"Fira code", "Fira Mono", monospace',
-                fontSize: 16,
+                fontFamily: '"JetBrains Mono", "Fira Code", monospace',
+                fontSize: 15,
+                fontWeight: "500",
                 overflow: "auto",
-                border: "1px solid #ddd",
-                borderRadius: "5px",
+                border: "1px solid #2d2d2d",
+                borderRadius: "8px",
                 height: "100%",
                 width: "100%",
+                lineHeight: "1.6",
+                letterSpacing: "0.5px",
+                color: "#e4e4e4",
+                backgroundColor: "#1e1e1e",
               }}
             />
           </div>
@@ -55,7 +60,50 @@ function App() {
           </div>
         </div>
         <div className="right">
-          <Markdown rehypePlugins={[rehypeHighlight]}>{review}</Markdown>
+          <Markdown
+            rehypePlugins={[rehypeHighlight]}
+            components={{
+              p: ({ node, ...props }) => (
+                <p
+                  style={{ color: "#e4e4e4", marginBottom: "1rem" }}
+                  {...props}
+                />
+              ),
+              h1: ({ node, ...props }) => (
+                <h1
+                  style={{
+                    color: "#ffffff",
+                    marginBottom: "1.5rem",
+                    fontSize: "1.8rem",
+                  }}
+                  {...props}
+                />
+              ),
+              h2: ({ node, ...props }) => (
+                <h2
+                  style={{
+                    color: "#ffffff",
+                    marginBottom: "1.2rem",
+                    fontSize: "1.5rem",
+                  }}
+                  {...props}
+                />
+              ),
+              code: ({ node, ...props }) => (
+                <code
+                  style={{
+                    backgroundColor: "#2d2d2d",
+                    padding: "2px 6px",
+                    borderRadius: "4px",
+                    color: "#e4e4e4",
+                  }}
+                  {...props}
+                />
+              ),
+            }}
+          >
+            {review}
+          </Markdown>
         </div>
       </main>
     </>

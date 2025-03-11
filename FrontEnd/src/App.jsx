@@ -8,6 +8,8 @@ import "highlight.js/styles/github-dark.css";
 import axios from "axios";
 import "./App.css";
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
 function App() {
   const [count, setCount] = useState(0);
   const [code, setCode] = useState(` function sum() {
@@ -15,16 +17,25 @@ function App() {
 }`);
 
   const [review, setReview] = useState(``);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     prism.highlightAll();
   }, []);
 
   async function reviewCode() {
-    const response = await axios.post("http://localhost:3000/ai/get-review", {
-      code,
-    });
-    setReview(response.data);
+    try {
+      setLoading(true);
+      const response = await axios.post(`${API_URL}/ai/get-review`, {
+        code,
+      });
+      setReview(response.data);
+    } catch (error) {
+      console.error("Error reviewing code:", error);
+      setReview("Error: Failed to get code review. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (

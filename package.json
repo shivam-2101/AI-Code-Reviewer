@@ -1,0 +1,16 @@
+{
+  "name": "ai-code-reviewer",
+  "version": "1.0.0",
+  "description": "AI Code Reviewer Application",
+  "scripts": {
+    "install-backend": "cd BackEnd && npm install",
+    "install-frontend": "cd FrontEnd && npm install",
+    "start": "cd BackEnd && npm start",
+    "build": "cd FrontEnd && npm install && npm run build",
+    "dev": "cd FrontEnd && npm run dev",
+    "postinstall": "npm run install-backend"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -2,6 +2,7 @@ services:
   - type: web
     name: ai-code-reviewer-backend
     runtime: node
+    plan: free
     rootDirectory: BackEnd
     buildCommand: npm install
     startCommand: npm start
@@ -10,3 +11,4 @@ services:
         value: 3000
       - key: GOOGLE_API_KEY
         sync: false
+    env: node

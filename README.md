@@ -1,6 +1,86 @@
-# Code Reviewer AI 🤖
+# AI Code Reviewer
 
-A powerful AI-powered code review assistant that leverages Google's Gemini AI to provide professional code reviews with 7+ years of simulated experience. This tool helps developers improve their code quality, identify potential issues, and learn best practices.
+An AI-powered code review application that provides instant feedback on your code.
+
+## Project Structure
+
+```
+.
+├── BackEnd/         # Express backend server
+├── FrontEnd/        # React + Vite frontend
+└── package.json     # Root package.json for deployment
+```
+
+## Environment Variables
+
+### Backend (.env)
+
+```
+PORT=3000
+GOOGLE_API_KEY=your_google_api_key
+```
+
+### Frontend (.env)
+
+```
+VITE_API_URL=http://localhost:3000 # Development
+VITE_API_URL=https://your-backend-url.onrender.com # Production
+```
+
+## Deployment
+
+### Backend (Render)
+
+1. Create a new Web Service on Render
+2. Connect your GitHub repository
+3. Configure:
+   - Root Directory: BackEnd
+   - Environment: Node
+   - Build Command: npm install
+   - Start Command: npm start
+4. Add environment variables in Render dashboard
+
+### Frontend (Vercel)
+
+1. Import your repository to Vercel
+2. Configure:
+   - Framework Preset: Vite
+   - Root Directory: FrontEnd
+   - Build Command: npm run build
+   - Output Directory: dist
+3. Add VITE_API_URL environment variable
+
+## Local Development
+
+1. Clone the repository
+2. Install dependencies:
+
+   ```bash
+   # Install backend dependencies
+   cd BackEnd
+   npm install
+
+   # Install frontend dependencies
+   cd ../FrontEnd
+   npm install
+   ```
+
+3. Create .env files in both directories
+4. Start the servers:
+
+   ```bash
+   # Start backend (from BackEnd directory)
+   npm start
+
+   # Start frontend (from FrontEnd directory)
+   npm run dev
+   ```
+
+## Tech Stack
+
+- Frontend: React, Vite, Prism.js
+- Backend: Express.js, Google AI
+- Deployment: Vercel (Frontend), Render (Backend)
 
 ## 🌟 Features
 
@@ -63,7 +143,7 @@ Before you begin, ensure you have:
 
    ```
    PORT=8000
-   GOOGLE_GEMINI_KEY=your_gemini_api_key_here
+   GOOGLE_GEMINI_KEY=your_gemini_api_key
    ```
 
 4. **Start Backend Server**

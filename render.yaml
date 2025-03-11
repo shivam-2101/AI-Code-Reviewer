@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: ai-code-reviewer-backend
+    runtime: node
+    rootDirectory: BackEnd
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: PORT
+        value: 3000
+      - key: GOOGLE_API_KEY
+        sync: false

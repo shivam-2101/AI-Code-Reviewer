@@ -11,28 +11,36 @@ import "./App.css";
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
 function App() {
-  const [count, setCount] = useState(0);
   const [code, setCode] = useState(` function sum() {
   return 1 + 1
 }`);
-
   const [review, setReview] = useState(``);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     prism.highlightAll();
+    console.log("API URL:", API_URL); // Log the API URL to verify it's correct
   }, []);
 
   async function reviewCode() {
     try {
       setLoading(true);
+      setError(null);
+      console.log("Sending request to:", `${API_URL}/ai/get-review`);
       const response = await axios.post(`${API_URL}/ai/get-review`, {
         code,
       });
+      console.log("Response:", response.data);
       setReview(response.data);
     } catch (error) {
       console.error("Error reviewing code:", error);
-      setReview("Error: Failed to get code review. Please try again.");
+      setError(error.message);
+      setReview(`Error: ${error.message}. Please try again.`);
+      if (error.response) {
+        console.error("Response data:", error.response.data);
+        console.error("Response status:", error.response.status);
+      }
     } finally {
       setLoading(false);
     }
@@ -66,11 +74,20 @@ function App() {
               }}
             />
           </div>
-          <div onClick={reviewCode} className="review">
-            Review
+          <div
+            onClick={loading ? null : reviewCode}
+            className={`review ${loading ? "loading" : ""}`}
+            style={{ opacity: loading ? 0.7 : 1 }}
+          >
+            {loading ? "Reviewing..." : "Review"}
           </div>
         </div>
         <div className="right">
+          {error && (
+            <div style={{ color: "#ff6b6b", marginBottom: "1rem" }}>
+              Error: {error}
+            </div>
+          )}
           <Markdown
             rehypePlugins={[rehypeHighlight]}
             components={{

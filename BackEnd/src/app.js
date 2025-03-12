@@ -7,14 +7,15 @@ const app = express();
 // CORS configuration
 app.use(
   cors({
-    origin: [
-      "https://ai-code-reviewer-shivam.vercel.app",
-      "http://localhost:5173",
-    ],
-    methods: ["GET", "POST"],
-    credentials: true,
+    origin: "*", // For development, we'll allow all origins
+    methods: ["GET", "POST", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: false, // Set to false since we're using '*' for origin
   })
 );
+
+// Handle preflight requests
+app.options("*", cors());
 
 app.use(express.json({ limit: "50mb" }));
 
